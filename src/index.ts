@@ -17,7 +17,7 @@ import { ToISOStringWithTimezone } from './utils/ToISOStringWithTimezone';
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', 'https://hotels-italy-frontend.vercel.app'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,    
 }))
