@@ -10,9 +10,6 @@ import morgan from 'morgan'
 import responseTime from 'response-time'
 
 // ❤️‍🔥 backup
-import { exec } from 'child_process'
-import fs from 'fs'
-import { takeBackup } from './utils/backupSystem';
 
 import 'dotenv/config'
 import { ToISOStringWithTimezone } from './utils/ToISOStringWithTimezone';
