@@ -13,6 +13,7 @@ export default async(router:express.Router) => {
     router.get('/hotels/categories', HotelController().getAllCategories)
     router.get('/hotels/provincias', HotelController().getAllProvincia)
     router.post('/hotels/filter', HotelController().getFilterHotels)
+    router.post('/hotels/search', HotelController().searchHotels)
     router.get('/hotels/getHotelBySlug', isAuthenticated, HotelController().getHotelBySlug)
     router.get('/hotels/getHotelById', isAuthenticated, HotelController().getHotelById)
 

@@ -240,19 +240,34 @@ export const HotelController = () => {
 
             try {
                 console.log(req.body)
-                const {provincia=[], categories=[]} = req.body
-
-                console.log(provincia)
-                console.log(categories)
+                const {provincia=[], categories=[], searchText=''} = req.body          
                 const hotels = await HotelModel.find({
                     provincia: {$in: provincia},
-                    categoria: {$in: categories}
-                }).limit(50)
+                    categoria: {$in: categories},                    
+                })
 
-                res.status(200).json(hotels)
+                res.status(200).json({
+                    results: hotels.length,
+                    hotels: hotels.slice(0, 50)
+                })
+            } catch (error) {
+                ValidationError(res, error)
+            }
+        },
+
+        searchHotels: async(req:express.Request, res: express.Response) => {
+
+            try {
+                console.log(req.body)
+                const { searchText } = req.body 
+                const hotels = await HotelModel.find({$text : { $search : searchText }})
+                res.status(200).json(hotels.length)
+
             } catch (error) {
                 ValidationError(res, error)
             }
         }
+
+
     }
 }
