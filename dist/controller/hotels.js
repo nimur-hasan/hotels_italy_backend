@@ -207,14 +207,26 @@ const HotelController = () => {
         getFilterHotels: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 console.log(req.body);
-                const { provincia = [], categories = [] } = req.body;
-                console.log(provincia);
-                console.log(categories);
+                const { provincia = [], categories = [], searchText = '' } = req.body;
                 const hotels = yield hotel_1.HotelModel.find({
                     provincia: { $in: provincia },
-                    categoria: { $in: categories }
-                }).limit(50);
-                res.status(200).json(hotels);
+                    categoria: { $in: categories },
+                });
+                res.status(200).json({
+                    results: hotels.length,
+                    hotels: hotels.slice(0, 50)
+                });
+            }
+            catch (error) {
+                (0, ValidationError_1.default)(res, error);
+            }
+        }),
+        searchHotels: (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+            try {
+                console.log(req.body);
+                const { searchText } = req.body;
+                const hotels = yield hotel_1.HotelModel.find({ $text: { $search: searchText } });
+                res.status(200).json(hotels.length);
             }
             catch (error) {
                 (0, ValidationError_1.default)(res, error);

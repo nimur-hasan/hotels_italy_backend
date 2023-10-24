@@ -21,6 +21,7 @@ exports.default = (router) => __awaiter(void 0, void 0, void 0, function* () {
     router.get('/hotels/categories', (0, hotels_1.HotelController)().getAllCategories);
     router.get('/hotels/provincias', (0, hotels_1.HotelController)().getAllProvincia);
     router.post('/hotels/filter', (0, hotels_1.HotelController)().getFilterHotels);
+    router.post('/hotels/search', (0, hotels_1.HotelController)().searchHotels);
     router.get('/hotels/getHotelBySlug', middlewares_1.isAuthenticated, (0, hotels_1.HotelController)().getHotelBySlug);
     router.get('/hotels/getHotelById', middlewares_1.isAuthenticated, (0, hotels_1.HotelController)().getHotelById);
     // ❤️‍🔥 UPDATE
